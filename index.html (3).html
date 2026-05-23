@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar Practice – Grade 12 / 11 Advanced | Dina Rabie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --teal: #0d9488;
+    --teal-light: #ccfbf1;
+    --gold: #f59e0b;
+    --cream: #fafaf7;
+    --white: #ffffff;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-400: #9ca3af;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+    --red: #ef4444;
+    --red-light: #fee2e2;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --blue-light: #dbeafe;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; font-family: 'DM Sans', sans-serif; color: var(--gray-800); background: var(--cream); }
+
+  /* ══════════════════════════════════════════
+     SCREEN A – HOME (rules + welcome)
+  ══════════════════════════════════════════ */
+  #screen-home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  /* top bar */
+  #home-bar {
+    background: var(--navy);
+    color: #fff;
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  #home-bar h1 { font-family:'Playfair Display',serif; font-size:1.1rem; }
+  #home-bar .sub { font-size:.75rem; color:#94a3b8; margin-left:10px; }
+  #timer-wrap {
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.1);
+    padding:5px 14px; border-radius:999px;
+    font-size:.88rem; font-weight:600;
+  }
+  #timer { font-variant-numeric:tabular-nums; letter-spacing:1px; }
+  #timer.warn { color:var(--gold); }
+  #timer.over { color:#f87171; }
+  #timer-note { font-size:.7rem; color:#94a3b8; }
+
+  /* two-column home body */
+  #home-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ── LEFT: rules ── */
+  #rules-col {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid var(--gray-200);
+    background: var(--white);
+    overflow: hidden;
+  }
+  #rules-head {
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 20px;
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  #rules-head .ico { font-size:1.3rem; }
+  #rules-head h2 { font-family:'Playfair Display',serif; font-size:1rem; }
+  #rules-head p { font-size:.72rem; color:#94a3b8; margin-top:2px; }
+
+  #rule-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px 14px;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+    flex-shrink: 0;
+  }
+  .rtab {
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    color: var(--navy);
+    font-family:'DM Sans',sans-serif;
+    font-size:.72rem; font-weight:600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all .18s;
+    white-space: nowrap;
+  }
+  .rtab:hover { background:var(--teal-light); border-color:var(--teal); color:var(--teal); }
+  .rtab.active { background:var(--teal); border-color:var(--teal); color:#fff; }
+
+  #rule-content { flex:1; overflow-y:auto; padding:18px 20px; }
+  .rcard { display:none; animation: fi .28s ease; }
+  .rcard.vis { display:block; }
+  @keyframes fi { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:none} }
+  @keyframes slideDown { from{transform:translateY(-100%);opacity:0} to{transform:translateY(0);opacity:1} }
+
+  .rcard h3 {
+    font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--navy);
+    margin-bottom:10px; padding-bottom:7px;
+    border-bottom:2px solid var(--teal-light);
+  }
+  .rcard .ar {
+    background:#fef9ec; border-left:3px solid var(--gold);
+    padding:7px 11px; border-radius:6px;
+    font-size:.82rem; color:#92400e;
+    margin-bottom:12px; direction:rtl; text-align:right; line-height:1.7;
+  }
+  .rcard .stitle {
+    font-weight:700; font-size:.75rem; color:var(--teal);
+    text-transform:uppercase; letter-spacing:.6px; margin:12px 0 5px;
+  }
+  .rcard .expl {
+    background:var(--gray-100); border-radius:7px;
+    padding:10px 13px; font-size:.83rem; line-height:1.7; margin-bottom:10px;
+  }
+  .rcard .ebox {
+    background:var(--blue-light); border-radius:7px;
+    padding:10px 13px; font-size:.83rem; margin-bottom:10px;
+  }
+  .rcard .ebox .elabel {
+    font-size:.68rem; font-weight:700; color:#1e40af;
+    text-transform:uppercase; letter-spacing:.4px; margin-bottom:3px;
+  }
+  .rcard .ebox p { color:#1e3a8a; line-height:1.6; }
+  .rcard .ebox .are { color:#3730a3; font-size:.8rem; margin-top:3px; direction:rtl; text-align:right; }
+  .rcard .mlink {
+    display:inline-flex; align-items:center; gap:5px;
+    background:var(--navy); color:#fff; text-decoration:none;
+    padding:7px 15px; border-radius:7px;
+    font-size:.8rem; font-weight:600; margin-top:6px; transition:background .18s;
+  }
+  .rcard .mlink:hover { background:var(--teal); }
+  .rcard .mlink::after { content:'→'; }
+
+  /* ── RIGHT: practice launcher ── */
+  #launch-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  #launch-head {
+    background: #0f4c5c;
+    color: #fff;
+    padding: 14px 20px;
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 10px;
+  }
+  #launch-head .ico { font-size:1.3rem; }
+  #launch-head h2 { font-family:'Playfair Display',serif; font-size:1rem; }
+  #launch-head p { font-size:.72rem; color:#94a3b8; margin-top:2px; }
+
+  #launch-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 24px;
+    text-align: center;
+  }
+  #launch-body .big-icon { font-size:3.5rem; }
+  #launch-body h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--navy); }
+  #launch-body p { font-size:.85rem; color:var(--gray-600); max-width:280px; line-height:1.6; }
+
+  .maze-launch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .mlbtn {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 14px 10px;
+    cursor: pointer;
+    font-family:'DM Sans',sans-serif;
+    font-weight:700;
+    font-size:.88rem;
+    color: var(--navy);
+    transition: all .18s;
+    display: flex; flex-direction:column; align-items:center; gap:4px;
+  }
+  .mlbtn .mn { font-size:.7rem; font-weight:400; color:var(--gray-400); }
+  .mlbtn:hover { border-color:var(--teal); background:var(--teal-light); color:var(--teal); }
+  .mlbtn.done { border-color:var(--teal); background:var(--teal); color:#fff; }
+  .mlbtn.done .mn { color:rgba(255,255,255,.7); }
+  .mlbtn.done::after { content:' ✓'; }
+
+  #btn-final-report {
+    display: none;
+    background: var(--gold);
+    border: none;
+    border-radius: 10px;
+    padding: 11px 24px;
+    font-family:'DM Sans',sans-serif;
+    font-weight:800; font-size:.9rem;
+    color: var(--navy);
+    cursor: pointer;
+    transition: background .18s;
+  }
+  #btn-final-report:hover { background:#d97706; }
+
+  /* ══════════════════════════════════════════
+     SCREEN B – MAZE (fullscreen)
+  ══════════════════════════════════════════ */
+  #screen-maze {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--white);
+  }
+  #screen-maze.active { display: flex; }
+
+  /* maze top bar */
+  #maze-bar {
+    background: var(--navy);
+    color: #fff;
+    height: 50px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  #btn-back {
+    display: flex; align-items:center; gap:6px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #fff;
+    padding: 5px 13px;
+    border-radius: 7px;
+    font-family:'DM Sans',sans-serif;
+    font-size:.8rem; font-weight:700;
+    cursor: pointer;
+    transition: background .18s;
+    white-space: nowrap;
+  }
+  #btn-back:hover { background:rgba(255,255,255,.22); }
+  #maze-title-bar {
+    font-family:'Playfair Display',serif;
+    font-size:.95rem;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #maze-progress-pills {
+    display: flex; gap:5px; align-items:center;
+  }
+  .mpill {
+    width:8px; height:8px; border-radius:50%;
+    background:rgba(255,255,255,.2);
+    transition:background .2s;
+  }
+  .mpill.answered { background:var(--teal); }
+  .mpill.current { background:var(--gold); width:10px; height:10px; }
+  #maze-timer-pill {
+    background:rgba(255,255,255,.1);
+    padding:4px 12px; border-radius:999px;
+    font-size:.82rem; font-weight:600;
+    font-variant-numeric:tabular-nums;
+    letter-spacing:1px;
+  }
+  #maze-timer-pill.warn { color:var(--gold); }
+  #maze-timer-pill.over { color:#f87171; }
+
+  /* maze body: passage LEFT | questions RIGHT */
+  #maze-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* passage */
+  #passage-col {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid var(--gray-200);
+    background: var(--white);
+    overflow: hidden;
+  }
+  #passage-col-head {
+    padding: 9px 16px;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+    font-size:.72rem; font-weight:700;
+    color:var(--gray-600); text-transform:uppercase; letter-spacing:.5px;
+    flex-shrink: 0;
+  }
+  #passage-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 20px;
+  }
+  #passage-text {
+    font-size:.92rem;
+    line-height: 2;
+    color: var(--gray-800);
+  }
+  #passage-text p { margin-bottom: 14px; }
+  .pblank {
+    display:inline-block;
+    background:var(--teal-light);
+    color:var(--teal);
+    font-weight:700;
+    padding:1px 8px;
+    border-radius:5px;
+    min-width:30px;
+    text-align:center;
+    border:1.5px solid var(--teal);
+    transition: all .2s;
+  }
+  .pblank.hl { background:#fef9ec; border-color:var(--gold); color:#92400e; }
+  .pblank.correct { background:var(--green-light); color:var(--green); border-color:var(--green); }
+  .pblank.wrong { background:var(--red-light); color:var(--red); border-color:var(--red); }
+
+  /* questions col */
+  #questions-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  /* q top strip */
+  #q-strip {
+    padding: 9px 16px;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items:center; gap:10px;
+    flex-shrink: 0;
+  }
+  #q-strip-label { font-size:.72rem; font-weight:700; color:var(--gray-600); text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+  #q-prog-wrap { flex:1; height:6px; background:var(--gray-200); border-radius:999px; overflow:hidden; }
+  #q-prog-bar { height:100%; background:var(--teal); border-radius:999px; transition:width .3s; width:0%; }
+  #q-strip-count { font-size:.72rem; font-weight:700; color:var(--gray-400); white-space:nowrap; }
+
+  /* q scrollable area */
+  #q-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 18px;
+  }
+
+  /* question card */
+  .qcard {
+    background:var(--white);
+    border:1.5px solid var(--gray-200);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 4px 20px rgba(0,0,0,.07);
+    animation: fi .25s ease;
+  }
+  .qcard .qlabel {
+    font-size:.7rem; font-weight:700; color:var(--teal);
+    text-transform:uppercase; letter-spacing:.6px; margin-bottom:10px;
+  }
+  .qcard .qtext {
+    font-size:.95rem; font-weight:600; color:var(--navy);
+    line-height:1.55; margin-bottom:18px;
+  }
+  .qcard .qtext em { color:var(--gray-600); font-style:italic; font-weight:400; font-size:.88rem; display:block; margin-top:5px; }
+  .opts { display:flex; flex-direction:column; gap:9px; }
+  .obtn {
+    display:flex; align-items:center; gap:11px;
+    background:var(--gray-100);
+    border:1.5px solid var(--gray-200);
+    border-radius:10px;
+    padding:11px 14px;
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    font-size:.9rem; font-weight:500;
+    color:var(--gray-800);
+    text-align:left;
+    transition:all .15s;
+    width:100%;
+  }
+  .obtn:hover:not(:disabled) { background:var(--teal-light); border-color:var(--teal); color:var(--teal); }
+  .obtn.sel { background:var(--navy); border-color:var(--navy); color:#fff; }
+  .obtn.cor { background:var(--green-light); border-color:var(--green); color:var(--green); font-weight:700; }
+  .obtn.wrg { background:var(--red-light); border-color:var(--red); color:var(--red); }
+  .obtn .lt {
+    width:24px; height:24px; border-radius:50%;
+    background:var(--gray-200);
+    display:flex; align-items:center; justify-content:center;
+    font-size:.75rem; font-weight:800; flex-shrink:0;
+    transition:all .15s;
+  }
+  .obtn.sel .lt { background:rgba(255,255,255,.25); color:#fff; }
+  .obtn.cor .lt { background:var(--green); color:#fff; }
+  .obtn.wrg .lt { background:var(--red); color:#fff; }
+
+  /* nav bar */
+  #q-nav {
+    padding:12px 18px;
+    background:var(--white);
+    border-top:1px solid var(--gray-200);
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px;
+    flex-shrink:0;
+  }
+  .nbtn {
+    padding:9px 22px;
+    border-radius:9px; border:none;
+    font-family:'DM Sans',sans-serif;
+    font-size:.86rem; font-weight:700;
+    cursor:pointer; transition:all .15s;
+  }
+  #nbtn-prev { background:var(--gray-100); color:var(--gray-600); }
+  #nbtn-prev:hover { background:var(--gray-200); }
+  #nbtn-next { background:var(--teal); color:#fff; }
+  #nbtn-next:hover { background:#0b7a70; }
+  #nbtn-submit { background:var(--navy); color:#fff; display:none; }
+  #nbtn-submit:hover { background:#2d3f6f; }
+  #nbtn-nextmaze { background:var(--gold); color:var(--navy); display:none; font-weight:800; }
+  #nbtn-nextmaze:hover { background:#d97706; }
+  #nbtn-finalrep { background:var(--teal); color:#fff; display:none; }
+  #nbtn-finalrep:hover { background:#0b7a70; }
+
+  /* ── results inside q-scroll ── */
+  .res-score-card {
+    background:var(--navy); color:#fff;
+    border-radius:14px; padding:22px;
+    text-align:center; margin-bottom:14px;
+    position:relative; overflow:hidden;
+  }
+  .res-score-card::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at top left,rgba(13,148,136,.35),transparent 60%);
+    pointer-events:none;
+  }
+  .res-score-card h3 { font-family:'Playfair Display',serif; font-size:.95rem; margin-bottom:10px; opacity:.8; }
+  .score-big { font-size:3rem; font-weight:900; line-height:1; }
+  .score-big span { font-size:1.1rem; font-weight:400; opacity:.55; }
+  .score-lbl { font-size:.82rem; opacity:.7; margin-top:6px; }
+  .ritem {
+    background:var(--white); border:1.5px solid var(--gray-200);
+    border-radius:10px; padding:13px 15px; margin-bottom:10px;
+  }
+  .ritem .riq { font-size:.72rem; font-weight:700; color:var(--gray-400); margin-bottom:3px; }
+  .ritem .ritxt { font-size:.85rem; font-weight:600; color:var(--navy); margin-bottom:7px; line-height:1.4; }
+  .ri-row { display:flex; gap:7px; flex-wrap:wrap; font-size:.78rem; }
+  .ri-yours { padding:3px 10px; border-radius:999px; font-weight:600; }
+  .ri-yours.cor { background:var(--green-light); color:var(--green); }
+  .ri-yours.wrg { background:var(--red-light); color:var(--red); }
+  .ri-corr { padding:3px 10px; border-radius:999px; background:var(--teal-light); color:var(--teal); font-weight:600; }
+  .ri-rule { padding:3px 10px; border-radius:999px; background:#fef9ec; color:#92400e; font-weight:600; border:1px solid #fde68a; font-size:.72rem; }
+
+  /* ── final report (shown inside screen-maze) ── */
+  #final-view {
+    display:none;
+    flex-direction:column;
+    overflow-y:auto;
+    padding:24px;
+    gap:14px;
+    background:var(--cream);
+    flex:1;
+  }
+  #final-view.vis { display:flex; }
+  .fbanner {
+    background:linear-gradient(135deg,var(--navy) 0%,#0f4c5c 100%);
+    color:#fff; border-radius:14px; padding:26px; text-align:center;
+  }
+  .fbanner h2 { font-family:'Playfair Display',serif; font-size:1.25rem; margin-bottom:8px; }
+  .fbanner p { font-size:.83rem; opacity:.75; }
+  .overall-num { font-size:2.8rem; font-weight:900; margin:8px 0 3px; }
+  .topic-box {
+    background:var(--white); border:1.5px solid var(--gray-200);
+    border-radius:12px; padding:16px;
+  }
+  .topic-box h4 { font-size:.75rem; font-weight:700; color:var(--gray-400); text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px; }
+  .trow {
+    display:flex; align-items:center; gap:10px;
+    padding:8px 0; border-bottom:1px solid var(--gray-100);
+    font-size:.85rem;
+  }
+  .trow:last-child { border-bottom:none; }
+  .trow .tname { flex:1; font-weight:600; color:var(--navy); }
+  .trow .tstat { font-size:.76rem; color:var(--gray-400); }
+  .tstatus { padding:3px 10px; border-radius:999px; font-size:.73rem; font-weight:700; }
+  .tstatus.great { background:var(--green-light); color:var(--green); }
+  .tstatus.review { background:var(--red-light); color:var(--red); }
+  .tstatus.ok { background:#fef9ec; color:#92400e; }
+  .feedback-box {
+    background:var(--white); border:1.5px solid var(--gray-200);
+    border-radius:12px; padding:16px;
+    font-size:.87rem; line-height:1.75; color:var(--gray-800);
+  }
+  .feedback-box .ftitle {
+    font-size:.73rem; font-weight:700; color:var(--teal);
+    text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;
+  }
+
+  /* scrollbars */
+  ::-webkit-scrollbar { width:5px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--gray-200); border-radius:999px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--gray-400); }
+
+  /* ── WATERMARK ── */
+  #watermark {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  #watermark .wm-inner {
+    position: absolute;
+    inset: -60%;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+  #watermark .wm-row {
+    display: flex;
+    gap: 180px;
+    transform: rotate(-35deg);
+    white-space: nowrap;
+  }
+  #watermark .wm-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: .72rem;
+    font-weight: 700;
+    color: rgba(26,39,68,0.06);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    user-select: none;
+    line-height: 1.4;
+  }
+  #watermark .wm-sub {
+    display: block;
+    font-size: .58rem;
+    font-weight: 400;
+    letter-spacing: .7px;
+    color: rgba(26,39,68,0.04);
+  }
+
+  /* ── VISITOR COUNTER ── */
+  #visitor-pill {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: .76rem;
+    color: #cbd5e1;
+    white-space: nowrap;
+  }
+  #visitor-pill .vdot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px #4ade80;
+    flex-shrink: 0;
+    animation: vpulse 2s infinite;
+  }
+  @keyframes vpulse {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.45;transform:scale(.75)}
+  }
+
+  /* ── YOUTUBE BUTTON ── */
+  #yt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 13px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .76rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background .18s, transform .15s;
+    flex-shrink: 0;
+  }
+  #yt-btn:hover { background:#cc0000; transform:scale(1.04); }
+</style>
+</head>
+<body>
+
+<!-- WATERMARK -->
+<div id="watermark" aria-hidden="true">
+  <div class="wm-inner">
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+    <div class="wm-row">
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+      <div class="wm-text">Created by Dina Rabie<span class="wm-sub">© All Rights Reserved</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN A: HOME
+═══════════════════════════════════════════ -->
+<div id="screen-home">
+
+  <!-- top bar -->
+  <div id="home-bar">
+    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+      <h1>Grammar Practice</h1>
+      <span class="sub">Grade 12 General / 11 Advanced &nbsp;·&nbsp; Term 3, 2025–2026 &nbsp;·&nbsp; Dina Rabie</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <div id="visitor-pill">
+        <span class="vdot"></span>
+        <span id="visitor-count">— visitors</span>
+      </div>
+      <a id="yt-btn" href="https://www.youtube.com/@DinaRabie-QuickEnglish" target="_blank">
+        <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.6 2.03C17.39.85 16.46.07 15.28.04 13.08 0 9 0 9 0S4.92 0 2.72.04C1.54.07.61.85.4 2.03.18 3.22 0 4.78 0 6.5c0 1.72.18 3.28.4 4.47.21 1.18 1.14 1.96 2.32 1.99C4.92 13 9 13 9 13s4.08 0 6.28-.04c1.18-.03 2.11-.81 2.32-1.99.22-1.19.4-2.75.4-4.47 0-1.72-.18-3.28-.4-4.47z" fill="#fff"/><path d="M7 9.25V3.75L12 6.5 7 9.25z" fill="red"/></svg>
+        🔔 Subscribe — It's Free!
+      </a>
+      <div id="timer-wrap">
+        <span>⏱</span>
+        <span id="timer">10:00</span>
+        <span id="timer-note"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="home-body">
+
+    <!-- RULES column -->
+    <div id="rules-col">
+      <div id="rules-head">
+        <span class="ico">📖</span>
+        <div>
+          <h2>Grammar Rules &amp; Explanations</h2>
+          <p>Click a topic to explore the rule</p>
+        </div>
+      </div>
+      <div id="rule-tabs">
+        <button class="rtab active" onclick="showRule(0)">Adverbial Linkers</button>
+        <button class="rtab" onclick="showRule(1)">3rd Conditional</button>
+        <button class="rtab" onclick="showRule(2)">Past Perfect Passive</button>
+        <button class="rtab" onclick="showRule(3)">Used to / Would</button>
+        <button class="rtab" onclick="showRule(4)">Phrasal Verbs</button>
+        <button class="rtab" onclick="showRule(5)">Reported Speech</button>
+        <button class="rtab" onclick="showRule(6)">Past Perfect Continuous</button>
+      </div>
+      <div id="rule-content">
+
+        <!-- Rule 0 -->
+        <div class="rcard vis" id="rc0">
+          <h3>Adverbial Linkers</h3>
+          <div class="ar">أدوات الربط الظرفية – تربط الجمل وتوضّح العلاقة بينها (سبب / نتيجة / تناقض / وقت)</div>
+          <div class="stitle">What are they?</div>
+          <div class="expl">
+            Words/phrases that connect sentences to show a logical relationship.<br><br>
+            <b>Contrast:</b> However, Although, Even though, Despite, Nevertheless<br>
+            <b>Result:</b> Therefore, As a result, Consequently<br>
+            <b>Addition:</b> Furthermore, Moreover, In addition<br>
+            <b>Time:</b> Meanwhile, Eventually, Afterwards<br>
+            <b>Condition:</b> Unless (= if not)
+          </div>
+          <div class="stitle">Examples</div>
+          <div class="ebox"><div class="elabel">Contrast</div><p>I was tired. <b>However,</b> I finished my work.</p><p class="are">كنت متعبًا، ومع ذلك أنهيت عملي.</p></div>
+          <div class="ebox"><div class="elabel">Result</div><p>He studied hard. <b>As a result,</b> he passed the exam.</p><p class="are">ذاكر بجد. ونتيجةً لذلك، نجح.</p></div>
+          <div class="ebox"><div class="elabel">Condition</div><p><b>Unless</b> you hurry, you will miss the bus.</p><p class="are">إذا لم تسرع، ستفوتك الحافلة.</p></div>
+          <div class="stitle">Quick Tip 💡</div>
+          <div class="expl"><b>However / Therefore</b> → capital + comma after. &nbsp; <b>Although / Unless</b> → followed by subject + verb clause.</div>
+          <a class="mlink" href="https://www.mauthor.com/present/5191624426127360" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+        <!-- Rule 1 -->
+        <div class="rcard" id="rc1">
+          <h3>Third Conditional</h3>
+          <div class="ar">الشرط الثالث – مواقف خيالية في الماضي – شيء لم يحدث وكيف كانت النتائج ستختلف</div>
+          <div class="stitle">Structure</div>
+          <div class="expl"><b>If + Past Perfect &nbsp;,&nbsp; would have + Past Participle</b><br><br>
+            • if-clause: <b>had + V3</b><br>
+            • result: <b>would / could / might + have + V3</b><br>
+            Both refer to an unreal past situation.</div>
+          <div class="stitle">Examples</div>
+          <div class="ebox"><div class="elabel">Example 1</div><p>If I <b>had studied</b> harder, I <b>would have passed</b> the exam.</p><p class="are">لو كنت ذاكرت بجد أكثر، لكنت نجحت.</p></div>
+          <div class="ebox"><div class="elabel">Example 2</div><p>If she <b>had left</b> earlier, she <b>would not have missed</b> the train.</p><p class="are">لو كانت خرجت أبكر، ما كانت فاتها القطار.</p></div>
+          <div class="stitle">Common Mistake ⚠️</div>
+          <div class="expl">Never use <b>would have</b> in the if-clause.<br>✗ "If I would have studied…" &nbsp;&nbsp; ✓ "If I had studied…"</div>
+          <a class="mlink" href="https://www.mauthor.com/present/4503828900216832" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="rcard" id="rc2">
+          <h3>Past Perfect Simple Passive</h3>
+          <div class="ar">المبني للمجهول في الماضي التام – الفاعل مجهول والحدث وقع قبل حدث ماضٍ آخر</div>
+          <div class="stitle">Structure</div>
+          <div class="expl"><b>had + been + Past Participle (V3)</b><br><br>
+            • Subject receives the action (does not do it).<br>
+            • Action happened <b>before</b> another past event.<br>
+            • Add <b>by + agent</b> if the doer is mentioned.</div>
+          <div class="stitle">Examples</div>
+          <div class="ebox"><div class="elabel">Example 1</div><p>The project <b>had been completed</b> before the meeting.</p><p class="are">كان المشروع قد تم إنجازه قبل الاجتماع.</p></div>
+          <div class="ebox"><div class="elabel">Example 2</div><p>The birds <b>had been protected</b> by scientists before release.</p><p class="are">كانت الطيور قد تم حمايتها قبل الإفراج عنها.</p></div>
+          <div class="stitle">Active vs Passive</div>
+          <div class="expl">Active: Scientists <b>had protected</b> the birds.<br>Passive: The birds <b>had been protected</b>.</div>
+          <a class="mlink" href="https://www.mauthor.com/present/4806929341087744" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="rcard" id="rc3">
+          <h3>Used to / Would</h3>
+          <div class="ar">used to / would – عادات وأفعال متكررة في الماضي لم تعد تحدث الآن</div>
+          <div class="stitle">Used to</div>
+          <div class="expl"><b>Used to + base verb</b><br><br>
+            • Past habits <b>OR</b> past states no longer true.<br>
+            • Works with action AND state verbs.<br>
+            Negative: <b>didn't use to</b> &nbsp;|&nbsp; Question: <b>Did you use to…?</b></div>
+          <div class="ebox"><div class="elabel">Example</div><p>We <b>used to play</b> football every Friday.</p><p class="are">كنا نلعب كرة القدم كل يوم جمعة.</p></div>
+          <div class="stitle">Would</div>
+          <div class="expl"><b>Would + base verb</b><br><br>
+            • Repeated past <b>actions only</b> (NOT states).<br>
+            ✗ "I would know him." &nbsp; ✓ "I used to know him."<br>
+            Common with: every summer, on Fridays, whenever…</div>
+          <div class="ebox"><div class="elabel">Example</div><p>Every summer, we <b>would travel</b> to Alexandria.</p><p class="are">كل صيف كنا نسافر إلى الإسكندرية.</p></div>
+          <div class="stitle">Key Difference ⚡</div>
+          <div class="expl"><b>Used to</b> = habits + states &nbsp;|&nbsp; <b>Would</b> = repeated actions only</div>
+          <a class="mlink" href="https://www.mauthor.com/present/5601060713791488" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+        <!-- Rule 4 -->
+        <div class="rcard" id="rc4">
+          <h3>Phrasal Verbs</h3>
+          <div class="ar">الأفعال المركبة – فعل + حرف جر / ظرف، ومعناها مختلف عن الفعل الأصلي</div>
+          <div class="stitle">Key Phrasal Verbs</div>
+          <div class="expl">
+            <b>look for</b> = search for (يبحث عن)<br>
+            <b>look into</b> = investigate (يحقق في)<br>
+            <b>look at</b> = direct eyes toward (ينظر إلى)<br>
+            <b>come across</b> = find by chance (يصادف بالصدفة)<br>
+            <b>look after</b> = take care of (يهتم بـ)<br>
+            <b>find out</b> = discover (يكتشف)<br>
+            <b>pick up</b> = collect / learn quickly
+          </div>
+          <div class="stitle">Examples</div>
+          <div class="ebox"><div class="elabel">look for</div><p>I <b>looked for</b> my keys everywhere.</p><p class="are">بحثت عن مفاتيحي في كل مكان.</p></div>
+          <div class="ebox"><div class="elabel">come across</div><p>She <b>came across</b> a small injured fox behind the rocks.</p><p class="are">صادفت ثعلبًا صغيرًا مصابًا خلف الصخور.</p></div>
+          <div class="stitle">Word Order 💡</div>
+          <div class="expl">Separable: "look it up" ✓ &nbsp; Inseparable: never "come it across" ✗</div>
+          <a class="mlink" href="https://www.mauthor.com/present/4857474769616896" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+        <!-- Rule 5 -->
+        <div class="rcard" id="rc5">
+          <h3>Reported Speech</h3>
+          <div class="ar">الكلام المنقول – ننقل كلام شخص ما مع تغيير الضمائر والأزمنة والكلمات الظرفية</div>
+          <div class="stitle">Tense Backshift</div>
+          <div class="expl">
+            Present Simple → Past Simple<br>
+            Present Continuous → Past Continuous<br>
+            Past Simple → Past Perfect<br>
+            Will → Would &nbsp;|&nbsp; Can → Could &nbsp;|&nbsp; May → Might
+          </div>
+          <div class="stitle">Statement</div>
+          <div class="ebox"><div class="elabel">Direct → Reported</div><p>"I am tired." → Sara said that she <b>was</b> tired.</p><p class="are">قالت سارة إنها كانت متعبة.</p></div>
+          <div class="stitle">Reported Questions</div>
+          <div class="expl">
+            Yes/No → use <b>whether / if</b> + normal word order (no ?)<br>
+            Wh- → keep the question word + normal word order
+          </div>
+          <div class="ebox"><div class="elabel">Example</div><p>Omar asked the guide <b>whether he had seen</b> the fox.</p><p class="are">سأل عمر المرشد عمّا إذا كان قد رأى الثعلب.</p></div>
+          <div class="stitle">Time / Place Changes</div>
+          <div class="expl">now→then &nbsp;|&nbsp; today→that day &nbsp;|&nbsp; tomorrow→the next day &nbsp;|&nbsp; here→there &nbsp;|&nbsp; this→that</div>
+          <a class="mlink" href="https://www.mauthor.com/present/5092341657763840" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+        <!-- Rule 6 -->
+        <div class="rcard" id="rc6">
+          <h3>Past Perfect Continuous</h3>
+          <div class="ar">الماضي التام المستمر – فعل كان مستمرًا لفترة قبل حدث آخر في الماضي</div>
+          <div class="stitle">Structure</div>
+          <div class="expl"><b>had + been + verb-ing</b><br><br>
+            • Action in progress for a <b>duration</b> before another past event.<br>
+            • Key words: <b>for, since, all day, for hours, the whole time…</b></div>
+          <div class="stitle">Examples</div>
+          <div class="ebox"><div class="elabel">Example 1</div><p>They <b>had been studying</b> for hours before the exam started.</p><p class="are">كانوا يذاكرون لساعات قبل أن يبدأ الامتحان.</p></div>
+          <div class="ebox"><div class="elabel">Example 2</div><p>The scientists <b>had been observing</b> the animals for several hours.</p><p class="are">كان العلماء يراقبون الحيوانات لعدة ساعات.</p></div>
+          <div class="stitle">Vs. Past Perfect Simple</div>
+          <div class="expl">Past Perfect Simple = focus on <b>completion</b><br>Past Perfect Continuous = focus on <b>duration / process</b></div>
+          <a class="mlink" href="https://www.mauthor.com/present/4835841374814208" target="_blank">Full Interactive Lesson</a>
+        </div>
+
+      </div><!-- end rule-content -->
+    </div><!-- end rules-col -->
+
+    <!-- LAUNCH column -->
+    <div id="launch-col">
+      <div id="launch-head">
+        <span class="ico">✏️</span>
+        <div>
+          <h2>Maze Practice Tests</h2>
+          <p>MOE-style cloze tests – choose a maze to begin</p>
+        </div>
+      </div>
+      <div id="launch-body">
+        <div class="big-icon">🧩</div>
+        <h3>Ready to practise?</h3>
+        <p>Each maze opens in full screen. The passage stays on the left while you answer questions one by one on the right.</p>
+        <div class="maze-launch-grid">
+          <button class="mlbtn" id="mlbtn-0" onclick="openMaze(0)">
+            Maze 1
+            <span class="mn">Wildlife Camp</span>
+          </button>
+          <button class="mlbtn" id="mlbtn-1" onclick="openMaze(1)">
+            Maze 2
+            <span class="mn">Desert Trip</span>
+          </button>
+          <button class="mlbtn" id="mlbtn-2" onclick="openMaze(2)">
+            Maze 3
+            <span class="mn">Jungle Voices</span>
+          </button>
+          <button class="mlbtn" id="mlbtn-3" onclick="openMaze(3)">
+            Maze 4
+            <span class="mn">Ocean Research</span>
+          </button>
+        </div>
+        <button id="btn-final-report" onclick="openFinalReport()">📊 View Final Report</button>
+      </div>
+    </div>
+
+  </div><!-- end home-body -->
+</div><!-- end screen-home -->
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN B: MAZE (fullscreen overlay)
+═══════════════════════════════════════════ -->
+<div id="screen-maze">
+
+  <!-- maze top bar -->
+  <div id="maze-bar">
+    <button id="btn-back" onclick="goHome()">← Back to Rules</button>
+    <div id="maze-title-bar"></div>
+    <div id="maze-progress-pills"></div>
+    <div id="maze-timer-pill">10:00</div>
+  </div>
+
+  <!-- maze body -->
+  <div id="maze-body">
+
+    <!-- PASSAGE left -->
+    <div id="passage-col">
+      <div id="passage-col-head">📄 Reading Passage</div>
+      <div id="passage-scroll">
+        <div id="passage-text"></div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS right -->
+    <div id="questions-col">
+      <div id="q-strip">
+        <span id="q-strip-label">Progress</span>
+        <div id="q-prog-wrap"><div id="q-prog-bar"></div></div>
+        <span id="q-strip-count"></span>
+      </div>
+      <div id="q-scroll">
+        <!-- question card injected here -->
+      </div>
+      <div id="q-nav">
+        <button class="nbtn" id="nbtn-prev" onclick="prevQ()">← Back</button>
+        <div style="display:flex;gap:8px;">
+          <button class="nbtn" id="nbtn-next" onclick="nextQ()">Next →</button>
+          <button class="nbtn" id="nbtn-submit" onclick="submitMaze()">Submit ✓</button>
+          <button class="nbtn" id="nbtn-nextmaze" onclick="goNextMaze()"></button>
+          <button class="nbtn" id="nbtn-finalrep" onclick="openFinalReport()">📊 Final Report</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end maze-body -->
+
+  <!-- final report view (replaces maze-body) -->
+  <div id="final-view">
+    <!-- injected -->
+  </div>
+
+</div><!-- end screen-maze -->
+
+
+<script>
+/* ═══════════════════ DATA ═══════════════════ */
+const RULES = [
+  'Adverbial Linkers','Third Conditional','Past Perfect Passive',
+  'Used to / Would','Phrasal Verbs','Reported Speech','Past Perfect Continuous'
+];
+
+const MAZES = [
+  {
+    title: 'Maze 1 – A Week at the Wildlife Camp',
+    passage: `Last summer, Sami joined a wildlife camp near a forest. Before that trip, he (1) believe that animals only made simple sounds. His opinion changed after he attended several lectures about animal communication.
+
+On the first day, the guide said that dolphins (2) with special signals for many years. Later, the students were taken to a research center where injured birds (3) by scientists before being released into the wild.
+
+Sami listened carefully as a researcher explained how prairie dogs warn each other about danger. The scientist also said that some animals can (4) new forms of communication surprisingly quickly.
+
+If Sami (5) the trip, he would not have learned so much about animals. The guide later told the students that their trainer (6) near the lake the following morning.
+
+(7), Sami realized that animals were far more intelligent than he had expected.`,
+    questions: [
+      { text:'He _______ believe that animals only made simple sounds.', options:['used to','use to','is used to'], answer:0, rule:3 },
+      { text:'The guide said that dolphins _______ with special signals for many years.', options:['had been communicating','were communicated','want to communicate'], answer:0, rule:6 },
+      { text:'Injured birds _______ by scientists before being released into the wild.', options:['had protected','had been protected','were protecting'], answer:1, rule:2 },
+      { text:'Some animals can _______ new forms of communication surprisingly quickly.', options:['look into','look at','look in to'], answer:0, rule:4 },
+      { text:'If Sami _______ the trip, he would not have learned so much.', options:['had been ignored','had ignored','have been ignoring'], answer:1, rule:1 },
+      { text:'The guide told the students that their trainer _______ near the lake the following morning.', options:['will meet us','can meet them','would meet them'], answer:2, rule:5 },
+      { text:'_______, Sami realized that animals were far more intelligent than he had expected.', options:['As a result','Unless','Although'], answer:0, rule:0 },
+    ]
+  },
+  {
+    title: 'Maze 2 – The Strange Noise in the Desert',
+    passage: `Last winter, Omar joined a camping trip in the desert with his classmates. Years ago, local people (1) use trained falcons to help them hunt in the desert.
+
+Late at night, the students heard strange noises near their tents. While they were searching the area, Omar suddenly (2) hiding behind some rocks.
+
+Earlier that evening, the guide (3) the weather conditions because a sandstorm was expected nearby. Several safety instructions (4) to the students before the trip had started.
+
+The next morning, Omar asked the guide (5) the fox during the night.
+
+If the students (6) away from the camp alone, they would have become lost in the desert. (7), everyone followed the guide's instructions carefully.`,
+    questions: [
+      { text:'Years ago, local people _______ use trained falcons to help them hunt.', options:['used to','use to','are used to'], answer:0, rule:3 },
+      { text:'Omar suddenly _______ hiding behind some rocks.', options:['came a small injured fox across','came across a small injured fox','came a small across injured fox'], answer:1, rule:4 },
+      { text:'The guide _______ the weather conditions because a sandstorm was expected.', options:['had been checking','have checked','was being checked'], answer:0, rule:6 },
+      { text:'Several safety instructions _______ to the students before the trip had started.', options:['had given','had been given','were giving'], answer:1, rule:2 },
+      { text:'Omar asked the guide _______ the fox during the night.', options:['if he saw','whether he had seen','did he see'], answer:1, rule:5 },
+      { text:'If the students _______ away from the camp alone, they would have become lost.', options:['have been wandered','had wandered','has been wandering'], answer:1, rule:1 },
+      { text:"_______, everyone followed the guide's instructions carefully.", options:['Therefore','Although','Unless'], answer:0, rule:0 },
+    ]
+  },
+  {
+    title: 'Maze 3 – Voices in the Jungle',
+    passage: `(1) the weather was extremely hot, the researchers decided to rest near a river deep in the jungle. They had travelled there to study how monkeys communicate with each other in the wild.
+
+While the team was walking through the trees, Lina suddenly (2) after she realized she had dropped it near the camp. A few minutes later, the group heard loud cries coming from nearby monkeys.
+
+Before the sounds became louder, the scientists (3) the behavior of the animals for several hours. They noticed that different cries seemed to carry different meanings.
+
+Several cameras (4) around the jungle before the research trip began. The recordings later helped the team understand the animals better.
+
+Later that evening, the guide asked Lina if she wanted to study (5) or wait until the next morning. Lina agreed to continue working despite feeling tired.
+
+Years ago, local hunters (6) observe animal movements carefully before travelling through the forest.
+
+If the researchers (7) the warning cries, they would have walked directly into a dangerous area of the jungle.`,
+    questions: [
+      { text:'_______ the weather was extremely hot, the researchers decided to rest near a river.', options:['Because','Although','However'], answer:0, rule:0 },
+      { text:'Lina suddenly _______ after she realized she had dropped it near the camp.', options:['looked her notebook for','looked notebook for her','looked for her notebook'], answer:2, rule:4 },
+      { text:'The scientists _______ the behavior of the animals for several hours (before sounds became louder).', options:['observed','had observed','had been observing'], answer:2, rule:6 },
+      { text:'Several cameras _______ around the jungle before the research trip began.', options:['had placed','had been placed','were placing'], answer:1, rule:2 },
+      { text:'The guide asked Lina if she wanted to study _______ or wait until the next morning.', options:['this sound now','those sounds then','these sounds at the time'], answer:1, rule:5 },
+      { text:'Years ago, local hunters _______ observe animal movements carefully.', options:['used to be','would','are used to'], answer:1, rule:3 },
+      { text:'If the researchers _______ the warning cries, they would have walked directly into a dangerous area.', options:['ignore','had ignored','had been ignoring'], answer:1, rule:1 },
+    ]
+  },
+  {
+    title: 'Maze 4 – The Ocean Research Team',
+    passage: `A group of scientists travelled to a remote island to study whales. Years ago, researchers (1) spend months at sea collecting information about marine animals. The work was difficult because weather conditions often changed suddenly during long journeys.
+
+Before the team arrived, special cameras (2) under the water by engineers. The scientists explained that whales communicate through complex sounds and movements. While the team was exploring the coast, one student stopped to (3) a missing recording device near the rocks.
+
+Earlier that day, the researchers (4) unusual whale sounds for several hours before they finally identified the source of the noise. One evening, the leader asked the students whether they had heard (5) strange sounds the previous night or not. The students replied that they had.
+
+If the weather (6) worse, the boats would not have continued the journey safely. (7), the sea remained calm during most of the trip, and the team completed their research successfully.`,
+    questions: [
+      { text:'Years ago, researchers _______ spend months at sea collecting information about marine animals.', options:['used to','would be','are used to'], answer:0, rule:3 },
+      { text:'Special cameras _______ under the water by engineers before the team arrived.', options:['had placed','had been placed','were placing'], answer:1, rule:2 },
+      { text:'One student stopped to _______ a missing recording device near the rocks.', options:['look for','look after','look into'], answer:0, rule:4 },
+      { text:'The researchers _______ unusual whale sounds for several hours before they identified the source.', options:['listened to','had listened to','had been listening to'], answer:2, rule:6 },
+      { text:'The leader asked whether they had heard _______ strange sounds the previous night.', options:['these','those','this'], answer:1, rule:5 },
+      { text:'If the weather _______ worse, the boats would not have continued the journey safely.', options:['becomes','had become','has become'], answer:1, rule:1 },
+      { text:'_______, the sea remained calm during most of the trip, and the team completed their research successfully.', options:['Although','Fortunately','Unless'], answer:1, rule:0 },
+    ]
+  }
+];
+
+/* ═══════════════════ STATE ═══════════════════ */
+let currentMaze = -1;
+let currentQ = 0;
+let userAnswers = {};
+let mazeResults = {};
+let submitted = false;
+let timerInterval = null;
+let elapsedSec = 0;
+let alarmFired = false;
+const LIMIT = 600;
+
+/* ═══════════════════ ALARM ═══════════════════ */
+function playAlarm() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    // Three rising beeps
+    const beepTimes = [0, 0.35, 0.7];
+    const freqs = [660, 880, 1100];
+    beepTimes.forEach((t, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freqs[i];
+      gain.gain.setValueAtTime(0, ctx.currentTime + t);
+      gain.gain.linearRampToValueAtTime(0.5, ctx.currentTime + t + 0.05);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + t + 0.28);
+      osc.start(ctx.currentTime + t);
+      osc.stop(ctx.currentTime + t + 0.3);
+    });
+  } catch(e) {}
+}
+
+function showAlarmBanner() {
+  // remove old if exists
+  const old = document.getElementById('alarm-banner');
+  if (old) old.remove();
+  const b = document.createElement('div');
+  b.id = 'alarm-banner';
+  b.innerHTML = `⏰ <b>10 minutes are up!</b> &nbsp; You can keep going — no rush.
+    <button onclick="this.parentElement.remove()" style="margin-left:14px;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.4);color:#fff;padding:3px 10px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.8rem;">✕ Dismiss</button>`;
+  b.style.cssText = `
+    position:fixed; top:50px; left:0; right:0; z-index:999;
+    background:#dc2626; color:#fff;
+    padding:10px 20px;
+    font-family:'DM Sans',sans-serif; font-size:.88rem;
+    display:flex; align-items:center; justify-content:center;
+    animation: slideDown .4s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,.2);`;
+  document.body.appendChild(b);
+  // auto-dismiss after 6 seconds
+  setTimeout(() => { if (b.parentElement) b.remove(); }, 6000);
+}
+
+/* ═══════════════════ TIMER ═══════════════════ */
+function startTimer() {
+  if (timerInterval) return;
+  timerInterval = setInterval(() => { elapsedSec++; renderTimer(); }, 1000);
+}
+function renderTimer() {
+  const rem = LIMIT - elapsedSec;
+  const fmt = (s) => {
+    const m = Math.floor(Math.abs(s)/60), sec = Math.abs(s)%60;
+    return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  };
+  // fire alarm exactly once at 0
+  if (rem === 0 && !alarmFired) {
+    alarmFired = true;
+    playAlarm();
+    showAlarmBanner();
+  }
+  // home timer
+  const ht = document.getElementById('timer');
+  const hn = document.getElementById('timer-note');
+  // maze timer pill
+  const mp = document.getElementById('maze-timer-pill');
+  if (rem > 0) {
+    ht.textContent = fmt(rem); ht.className = rem < 120 ? 'warn' : '';
+    mp.textContent = fmt(rem); mp.className = rem < 120 ? 'warn' : '';
+    hn.textContent = '';
+  } else {
+    ht.textContent = '+'+fmt(-rem); ht.className = 'over';
+    mp.textContent = '+'+fmt(-rem); mp.className = 'over';
+    hn.textContent = '(keep going!)';
+  }
+}
+
+/* ═══════════════════ RULE TABS ═══════════════════ */
+function showRule(i) {
+  document.querySelectorAll('.rcard').forEach(c => c.classList.remove('vis'));
+  document.getElementById('rc'+i).classList.add('vis');
+  document.querySelectorAll('.rtab').forEach((t,j) => t.classList.toggle('active', j===i));
+}
+
+/* ═══════════════════ NAVIGATION ═══════════════════ */
+function goHome() {
+  document.getElementById('screen-maze').classList.remove('active');
+  document.getElementById('final-view').classList.remove('vis');
+  document.getElementById('maze-body').style.display = 'flex';
+}
+
+function openMaze(idx) {
+  currentMaze = idx;
+  currentQ = 0;
+  userAnswers = {};
+  submitted = false;
+  startTimer();
+
+  document.getElementById('final-view').classList.remove('vis');
+  document.getElementById('maze-body').style.display = 'flex';
+  document.getElementById('screen-maze').classList.add('active');
+  document.getElementById('maze-title-bar').textContent = MAZES[idx].title;
+
+  buildPills();
+  renderPassage();
+  renderQ();
+}
+
+/* ═══════════════════ PROGRESS PILLS ═══════════════════ */
+function buildPills() {
+  const total = MAZES[currentMaze].questions.length;
+  const wrap = document.getElementById('maze-progress-pills');
+  wrap.innerHTML = '';
+  for (let i=0; i<total; i++) {
+    const d = document.createElement('div');
+    d.className = 'mpill';
+    d.id = 'pill-'+i;
+    wrap.appendChild(d);
+  }
+  updatePills();
+}
+function updatePills() {
+  const total = MAZES[currentMaze].questions.length;
+  for (let i=0; i<total; i++) {
+    const p = document.getElementById('pill-'+i);
+    if (!p) continue;
+    p.className = 'mpill';
+    if (i === currentQ) p.classList.add('current');
+    else if (userAnswers[i] !== undefined) p.classList.add('answered');
+  }
+}
+
+/* ═══════════════════ PASSAGE ═══════════════════ */
+function renderPassage() {
+  const maze = MAZES[currentMaze];
+  let html = maze.passage;
+  html = html.replace(/\((\d)\)/g, (_, n) =>
+    `<span class="pblank" id="pb${n}">(${n})</span>`);
+  html = html.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+  document.getElementById('passage-text').innerHTML = '<p>'+html+'</p>';
+}
+
+function highlightBlank(n) {
+  document.querySelectorAll('.pblank').forEach(b => {
+    if (!b.classList.contains('correct') && !b.classList.contains('wrong'))
+      b.classList.remove('hl');
+  });
+  const el = document.getElementById('pb'+n);
+  if (el && !el.classList.contains('correct') && !el.classList.contains('wrong')) {
+    el.classList.add('hl');
+    el.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+}
+
+/* ═══════════════════ QUESTION ═══════════════════ */
+function renderQ() {
+  const maze = MAZES[currentMaze];
+  const qs = maze.questions;
+  const q = qs[currentQ];
+  const total = qs.length;
+  const letters = ['A','B','C','D'];
+
+  // strip
+  document.getElementById('q-prog-bar').style.width = ((currentQ+1)/total*100)+'%';
+  document.getElementById('q-strip-count').textContent = `${currentQ+1} / ${total}`;
+
+  // options
+  let optHtml = q.options.map((opt,i) => {
+    let cls = 'obtn';
+    if (submitted) {
+      if (i===q.answer) cls+=' cor';
+      else if (userAnswers[currentQ]===i) cls+=' wrg';
+    } else if (userAnswers[currentQ]===i) cls+=' sel';
+    return `<button class="${cls}" onclick="selectAns(${i})" ${submitted?'disabled':''}>
+      <span class="lt">${letters[i]}</span>${opt}
+    </button>`;
+  }).join('');
+
+  document.getElementById('q-scroll').innerHTML = `
+    <div class="qcard">
+      <div class="qlabel">Question ${currentQ+1} of ${total}</div>
+      <div class="qtext">
+        Choose the correct option to fill blank (${currentQ+1}):
+        <em>${q.text}</em>
+      </div>
+      <div class="opts">${optHtml}</div>
+    </div>`;
+
+  // scroll q-scroll to top
+  document.getElementById('q-scroll').scrollTop = 0;
+
+  // nav buttons
+  const prev = document.getElementById('nbtn-prev');
+  const next = document.getElementById('nbtn-next');
+  const sub  = document.getElementById('nbtn-submit');
+  const nm   = document.getElementById('nbtn-nextmaze');
+  const fr   = document.getElementById('nbtn-finalrep');
+  prev.style.display = currentQ>0 ? 'inline-block' : 'none';
+  next.style.display = (currentQ<total-1 && !submitted) ? 'inline-block' : 'none';
+  sub.style.display  = (currentQ===total-1 && !submitted) ? 'inline-block' : 'none';
+  nm.style.display   = 'none';
+  fr.style.display   = 'none';
+
+  // highlight blank
+  highlightBlank(currentQ+1);
+  updatePills();
+}
+
+function selectAns(i) {
+  if (submitted) return;
+  userAnswers[currentQ] = i;
+  renderQ();
+}
+function prevQ() { if (currentQ>0){ currentQ--; renderQ(); } }
+function nextQ() {
+  const total = MAZES[currentMaze].questions.length;
+  if (currentQ<total-1){ currentQ++; renderQ(); }
+}
+
+/* ═══════════════════ SUBMIT ═══════════════════ */
+function submitMaze() {
+  submitted = true;
+  const maze = MAZES[currentMaze];
+  const qs = maze.questions;
+
+  const results = qs.map((q,i) => ({
+    q:i, chosen: userAnswers[i]!==undefined ? userAnswers[i] : -1,
+    correct:q.answer, isCorrect: userAnswers[i]===q.answer, rule:q.rule
+  }));
+  mazeResults[currentMaze] = results;
+
+  // mark home launch button done
+  const lb = document.getElementById('mlbtn-'+currentMaze);
+  if (lb) lb.classList.add('done');
+
+  // check all done
+  if (Object.keys(mazeResults).length===MAZES.length) {
+    document.getElementById('btn-final-report').style.display='inline-block';
+  }
+
+  // colour passage blanks
+  qs.forEach((q,i) => {
+    const el = document.getElementById('pb'+(i+1));
+    if (!el) return;
+    const r = results[i];
+    el.textContent = q.options[q.answer];
+    el.className = 'pblank '+(r.isCorrect?'correct':'wrong');
+  });
+
+  showMazeResults(results, maze);
+}
+
+function showMazeResults(results, maze) {
+  const score = results.filter(r=>r.isCorrect).length;
+  const total = results.length;
+  const pct = Math.round(score/total*100);
+  const letters = ['A','B','C','D'];
+  const emoji = pct===100?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚';
+  const msg = pct===100?'Perfect score!':pct>=70?'Great work!':pct>=50?'Good effort!':'Keep practising!';
+
+  let itemsHtml = results.map((r,i) => {
+    const q = maze.questions[i];
+    const yourLabel = r.chosen===-1?'Not answered':letters[r.chosen]+'. '+q.options[r.chosen];
+    const corrLabel = letters[r.correct]+'. '+q.options[r.correct];
+    return `<div class="ritem">
+      <div class="riq">Question ${i+1}</div>
+      <div class="ritxt">${q.text}</div>
+      <div class="ri-row">
+        <span class="ri-yours ${r.isCorrect?'cor':'wrg'}">${r.isCorrect?'✓':'✗'} ${yourLabel}</span>
+        ${!r.isCorrect?`<span class="ri-corr">✓ ${corrLabel}</span>`:''}
+        <span class="ri-rule">${RULES[r.rule]}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('q-scroll').innerHTML = `
+    <div class="res-score-card">
+      <h3>${maze.title}</h3>
+      <div class="score-big">${score}<span>/${total}</span></div>
+      <div class="score-lbl">${emoji} ${msg} &nbsp;(${pct}%)</div>
+    </div>
+    ${itemsHtml}`;
+  document.getElementById('q-scroll').scrollTop = 0;
+
+  // nav
+  document.getElementById('nbtn-prev').style.display   = 'none';
+  document.getElementById('nbtn-next').style.display   = 'none';
+  document.getElementById('nbtn-submit').style.display = 'none';
+  const nextIdx = currentMaze+1;
+  const nm = document.getElementById('nbtn-nextmaze');
+  const fr = document.getElementById('nbtn-finalrep');
+  if (nextIdx < MAZES.length) {
+    nm.textContent = `Next: Maze ${nextIdx+1} →`;
+    nm.style.display = 'inline-block';
+    fr.style.display = 'none';
+  } else {
+    nm.style.display = 'none';
+    fr.style.display = 'inline-block';
+  }
+}
+
+function goNextMaze() {
+  const next = currentMaze+1;
+  if (next < MAZES.length) openMaze(next);
+  else openFinalReport();
+}
+
+/* ═══════════════════ FINAL REPORT ═══════════════════ */
+function openFinalReport() {
+  const ruleStats = {};
+  RULES.forEach((r,i) => ruleStats[i] = {name:r, correct:0, total:0});
+  let totalC=0, totalQ=0;
+  Object.values(mazeResults).forEach(res => {
+    res.forEach(r => {
+      ruleStats[r.rule].total++; totalQ++;
+      if (r.isCorrect){ ruleStats[r.rule].correct++; totalC++; }
+    });
+  });
+  const pct = totalQ>0 ? Math.round(totalC/totalQ*100) : 0;
+
+  let rowsHtml = Object.values(ruleStats).filter(s=>s.total>0).map(s => {
+    const p = Math.round(s.correct/s.total*100);
+    const cls = p===100?'great':p>=70?'ok':'review';
+    const txt = p===100?'✓ Excellent':p>=70?'~ Good':'✗ Needs Review';
+    return `<div class="trow">
+      <span class="tname">${s.name}</span>
+      <span class="tstat">${s.correct}/${s.total}</span>
+      <span class="tstatus ${cls}">${txt}</span>
+    </div>`;
+  }).join('');
+
+  const toReview = Object.values(ruleStats).filter(s=>s.total>0 && s.correct/s.total<0.7).map(s=>s.name);
+  const reviewMsg = toReview.length===0
+    ? '🌟 Outstanding! You have a strong command of all grammar topics tested.'
+    : `📚 Focus your revision on: <b>${toReview.join(', ')}</b>. Use the Grammar Rules panel to revisit the explanations and lessons.`;
+
+  // show final-view, hide maze-body
+  document.getElementById('maze-body').style.display = 'none';
+  const fv = document.getElementById('final-view');
+  fv.innerHTML = `
+    <div class="fbanner">
+      <h2>📊 Final Grammar Report</h2>
+      <p>Based on your performance across all four maze tests</p>
+      <div class="overall-num">${totalC}<span style="font-size:1.1rem;font-weight:400;opacity:.55;">/${totalQ}</span></div>
+      <p style="opacity:.7;font-size:.83rem;">${pct}% overall accuracy</p>
+    </div>
+    <div class="topic-box">
+      <h4>Performance by Grammar Topic</h4>
+      ${rowsHtml}
+    </div>
+    <div class="feedback-box">
+      <div class="ftitle">📝 Feedback</div>
+      ${reviewMsg}
+    </div>
+    <button onclick="restartAll()" style="padding:10px 22px;border-radius:8px;border:none;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;align-self:flex-start;">↩ Restart All Mazes</button>`;
+  fv.classList.add('vis');
+  document.getElementById('screen-maze').classList.add('active');
+}
+
+function restartAll() {
+  mazeResults = {}; currentMaze=-1; currentQ=0; userAnswers={}; submitted=false;
+  elapsedSec=0; alarmFired=false; clearInterval(timerInterval); timerInterval=null;
+  document.getElementById('timer').textContent='10:00';
+  document.getElementById('timer').className='';
+  document.getElementById('maze-timer-pill').textContent='10:00';
+  document.getElementById('timer-note').textContent='';
+  document.querySelectorAll('.mlbtn').forEach(b=>b.classList.remove('done'));
+  document.getElementById('btn-final-report').style.display='none';
+  document.getElementById('final-view').classList.remove('vis');
+  document.getElementById('maze-body').style.display='flex';
+  goHome();
+}
+
+/* init */
+showRule(0);
+
+/* ═══════════════════ VISITOR COUNTER ═══════════════════ */
+(function() {
+  const KEY = 'dr_grammar_visitors';
+  let count = parseInt(localStorage.getItem(KEY) || '0', 10);
+  // Only increment once per session
+  if (!sessionStorage.getItem('dr_visited')) {
+    count++;
+    localStorage.setItem(KEY, count);
+    sessionStorage.setItem('dr_visited', '1');
+  }
+  function formatCount(n) {
+    if (n >= 1000) return (n/1000).toFixed(1).replace('.0','') + 'k';
+    return n.toString();
+  }
+  document.getElementById('visitor-count').textContent = formatCount(count) + ' visitor' + (count === 1 ? '' : 's');
+})();
+
+</script>
+</body>
+</html>
